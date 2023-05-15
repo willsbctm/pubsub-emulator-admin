@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { PubSub } from '@google-cloud/pubsub';
 
 @Component({
   selector: 'app-root',
