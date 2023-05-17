@@ -44,7 +44,9 @@ export default {
             </div>
             <div class="card-body">
               <h5 class="card-title">Send message</h5>
-                <textarea  ref="message" placeholder="Message" class="form-control" rows="30" cols="40"></textarea>
+                <textarea  ref="message" placeholder="{ 
+  &quot;value&quot: 123
+}" class="form-control" rows="30" cols="40"></textarea>
                 <button type="button" class="btn btn-outline-primary me-1" @click="sendMessage">Send</button>
                 <button type="button" class="btn btn-outline-secondary me-1" @click="back">Back</button>
             </div>

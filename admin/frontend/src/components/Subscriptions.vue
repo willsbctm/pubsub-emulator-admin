@@ -47,7 +47,7 @@ export default {
   <main>
   <div class="row">
     <div class="col-md-12">
-        <h1>Subscription</h1>
+        <h1>Subscriptions</h1>
         <h3>Topic: {{ topicPath }}</h3>
     </div>
   </div>
@@ -60,10 +60,11 @@ export default {
             </div>
             <div class="card-body">
               <h5 class="card-title">Name:</h5>
-                  <input type="text" class="form-control" ref="name" placeholder="Name" />
-                <p>Ex: topic-payments</p>
-              <button type="button" class="btn btn-outline-primary me-1" @click="createSubscription">Create</button>
-              <button type="button" class="btn btn-outline-secondary me-1" @click="back">Back</button>
+              <div class="mb-2">
+                <input type="text" class="form-control me-1" ref="name" placeholder="sub-topic-payments" />
+              </div>
+                <button type="button" class="btn btn-outline-primary me-1"  @click="createSubscription">Create</button>
+                <button type="button" class="btn btn-outline-secondary me-1" @click="back">Back</button>
             </div>
         </div>
       </div>
