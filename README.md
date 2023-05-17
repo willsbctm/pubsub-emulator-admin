@@ -1,4 +1,4 @@
-# pubsub-emulator-admin
+# Pubsub Emulator Admin
 
 ## Build:
 ```sh
