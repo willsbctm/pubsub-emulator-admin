@@ -35,6 +35,9 @@ export default {
     },
     async sendMessage(topic: string){
       this.$router.push({ name: 'message', query: { topic: topic } })
+    },
+    getName(topic: string) {
+      return topic.split('/').slice(-1)[0]
     }
   },
   async mounted() {
@@ -47,30 +50,46 @@ export default {
 <template>
   <main>
     <div class="row">
-        <div class="col-md-12">
-            <h1>Topics</h1>
-        </div>
-        <div class="col-md-12">
-            <ul class="list-group">
-                <li v-for="(topic, index) in topics" :key="index" ref="name" class="list-group-item">{{topic}}
-                  <button class="btn btn-sm btn-primary" @click="sendMessage(topic)">Message</button>
-                  <button class="btn btn-sm btn-primary" @click="getDetails(topic)">Details</button>
-                  <button class="btn btn-sm btn-primary" @click="deleteTopic(topic)">Delete</button>
-                </li>
-                
-            </ul>
-        </div>
+      <div class="col-md-12">
+          <h1>Topics</h1>
+      </div>
     </div>
 
-
-    <div class="card">
-      <div class="card-header">Name:</div>
-      <div class="card-body">
-        <div class="form-group">
-          <input type="text" class="form-control" ref="name" placeholder="Name" />
+    <div class="row mb-5">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              Create topic
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Name:</h5>
+                  <input type="text" class="form-control" ref="name" placeholder="Name" />
+                <p>Ex: topic-payments</p>
+              <button type="button" class="btn btn-outline-primary" @click="createTopic">Create</button>
+            </div>
         </div>
-        <button class="btn btn-sm btn-primary" @click="createTopic">Create</button>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+          <h2>List:</h2>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div v-for="(topic, index) in topics" :key="index" class="card">
+            <div class="card-header">
+              - {{  topic }}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ getName(topic) }}</h5>
+                <button type="button" class="btn btn-outline-secondary me-1" @click="sendMessage(topic)">Message</button>
+                <button type="button" class="btn btn-outline-info me-1" @click="getDetails(topic)">Details</button>
+                <button type="button" class="btn btn-outline-danger me-1" @click="deleteTopic(topic)">Delete</button>
+            </div>
+          </div>
+        </div>
     </div>
   </main>
 </template>

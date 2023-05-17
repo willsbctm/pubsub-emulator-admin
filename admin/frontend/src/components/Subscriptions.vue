@@ -45,33 +45,49 @@ export default {
 
 <template>
   <main>
-    <div class="row">
-        <div class="col-md-12">
-            <h1>{{ topicPath }}</h1>
-            <h3>Subscriptions</h3>
-        </div>
-        <div class="col-md-12">
-            <ul class="list-group">
-                <li v-for="(sub, index) in subscriptions" :key="index" ref="name" class="list-group-item">{{sub}}
-                  <button class="btn btn-sm btn-primary" @click="deleteSubscription(sub)">Delete</button>
-                </li>
-                
-            </ul>
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+        <h1>Subscription</h1>
+        <h3>Topic: {{ topicPath }}</h3>
     </div>
+  </div>
 
-
-    <div class="card">
-      <div class="card-header">Name:</div>
-      <div class="card-body">
-        <div class="form-group">
-          <input type="text" class="form-control" ref="name" placeholder="Name" />
+    <div class="row mb-5">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              Create Subscription
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Name:</h5>
+                  <input type="text" class="form-control" ref="name" placeholder="Name" />
+                <p>Ex: topic-payments</p>
+              <button type="button" class="btn btn-outline-primary me-1" @click="createSubscription">Create</button>
+              <button type="button" class="btn btn-outline-secondary me-1" @click="back">Back</button>
+            </div>
         </div>
-        <button class="btn btn-sm btn-primary" @click="createSubscription">Create</button>
       </div>
     </div>
-    <button class="btn btn-sm btn-primary" @click="back">Back</button>
-  </main>
+
+    <div class="row">
+      <div class="col-md-12">
+          <h2>List:</h2>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div v-for="(sub, index) in subscriptions" :key="index" class="card">
+            <div class="card-header">
+              - {{  topic }}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ sub }}</h5>
+                <button type="button" class="btn btn-outline-danger me-1" @click="deleteSubscription(sub)">Delete</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    </main>
 </template>
 
 <style>

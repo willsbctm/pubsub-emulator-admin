@@ -29,18 +29,28 @@ export default {
 
 <template>
   <main>
-    <h1>{{ topicPath }}</h1>
-    <h3>Message</h3>
-    <div class="card">
-      <div class="card-header">Name:</div>
-      <div class="card-body">
-        <div class="form-group">
-          <textarea  ref="message" placeholder="Message" class="form-control" rows="40" cols="50"></textarea>
+  <div class="row">
+    <div class="col-md-12">
+        <h1>Message</h1>
+        <h3>Topic: {{ topicPath }}</h3>
+    </div>
+  </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              {{ topic }}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Send message</h5>
+                <textarea  ref="message" placeholder="Message" class="form-control" rows="30" cols="40"></textarea>
+                <button type="button" class="btn btn-outline-primary me-1" @click="sendMessage">Send</button>
+                <button type="button" class="btn btn-outline-secondary me-1" @click="back">Back</button>
+            </div>
         </div>
-        <button class="btn btn-sm btn-primary" id="message" @click="sendMessage()">Send</button>
       </div>
     </div>
-    <button class="btn btn-sm btn-primary" @click="back">Back</button>
   </main>
 </template>
 
