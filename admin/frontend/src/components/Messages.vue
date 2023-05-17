@@ -6,19 +6,20 @@ export default {
     return {
       topic: (this.$route.query["topic"] as string).split('/').slice(-1)[0],
       topicPath: this.$route.query["topic"],
-      subscriptions: [] as string[],
-      message: ''
+      subscriptions: [] as string[]
     }
   },
   methods: {
     async sendMessage(){
-      const data = JSON.stringify(this.$refs.message.value)
+      const message = (this.$refs.message as HTMLInputElement).value
+      const data = JSON.stringify(message)
       await axios.post(`http://localhost:8000/api/topics/${this.topic}/message`, data, { 
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      this.$refs.message.value = ''
+      });
+
+      (this.$refs.message as HTMLInputElement).value = ''
     },
     async voltar(){
       this.$router.push({name: 'topics'})

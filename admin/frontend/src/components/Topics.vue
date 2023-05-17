@@ -4,8 +4,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      topics: [] as string[],
-      name: ''
+      topics: [] as string[]
     }
   },
   methods: {
@@ -14,12 +13,13 @@ export default {
       this.topics = topics.data
     },
     async createTopic(){
+      const name = (this.$refs.name as HTMLInputElement).value
       const data = {
-        name: this.$refs.name.value
+        name: name
       }
       const topic = await axios.post('http://localhost:8000/api/topics', data)
-      await this.getTopics()
-      this.$refs.name.value = null
+      await this.getTopics();
+      (this.$refs.name as HTMLInputElement).value = ''
     },
     async deleteTopic(topic: string){
       await axios.delete('http://localhost:8000/api/topics', {

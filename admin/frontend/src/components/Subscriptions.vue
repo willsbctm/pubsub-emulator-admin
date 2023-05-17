@@ -15,12 +15,13 @@ export default {
       this.subscriptions = subscriptions.data
     },
     async createSubscription(){
+      const name = (this.$refs.name as HTMLInputElement).value
       const data = {
-        name: this.$refs.name.value
+        name: name
       }
       const topic = await axios.post(`http://localhost:8000/api/topics/${this.topic}/subscriptions`, data)
-      await this.getSubscriptions()
-      this.$refs.name.value = null
+      await this.getSubscriptions();
+      (this.$refs.name as HTMLInputElement).value = ''
     },
     async deleteSubscription(subscription: string){
       await axios.delete('http://localhost:8000/api/subscriptions', {
