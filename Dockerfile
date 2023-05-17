@@ -24,7 +24,6 @@ FROM gcloud
 RUN apt install -y nginx
 COPY nginx.conf /etc/nginx/conf.d/
 COPY --from=build-frontend /app/dist /usr/share/nginx/html
-RUN /etc/init.d/nginx restart
 
 COPY init.sh init.sh
 RUN chmod +x init.sh

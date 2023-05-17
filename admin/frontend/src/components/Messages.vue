@@ -36,7 +36,7 @@ export default {
       <div class="card-header">Name:</div>
       <div class="card-body">
         <div class="form-group">
-          <input type="text" class="form-control" ref="message" placeholder="Message" />
+          <textarea  ref="message" placeholder="Message" class="form-control" rows="40" cols="50"></textarea>
         </div>
         <button class="btn btn-sm btn-primary" id="message" @click="sendMessage()">Send</button>
       </div>
