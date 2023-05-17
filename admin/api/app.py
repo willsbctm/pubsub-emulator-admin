@@ -2,12 +2,15 @@ import json
 from flask import Flask, jsonify, request
 from google.cloud import pubsub_v1
 from os import environ
+from flask_cors import CORS
 
 app = Flask("pubsub-admin-api")
 
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 project_id = environ.get('PUBSUB_PROJECT_ID')
 
-@app.route('/topics', methods=['GET'])
+@app.route('/api/topics', methods=['GET'])
 def list_topics():
     project_path = f"projects/{project_id}"
     publisher = pubsub_v1.PublisherClient()
@@ -16,7 +19,7 @@ def list_topics():
         response.append(topic.name)
     return jsonify(response)
 
-@app.route('/topics', methods=['POST'])
+@app.route('/api/topics', methods=['POST'])
 def create_topic():
     record = json.loads(request.data)
     publisher = pubsub_v1.PublisherClient()
@@ -24,15 +27,14 @@ def create_topic():
     topic = publisher.create_topic(request={"name": topic_path})
     return topic.name
 
-@app.route('/topics', methods=['DELETE'])
+@app.route('/api/topics', methods=['DELETE'])
 def delete_topic():
     record = json.loads(request.data)
     publisher = pubsub_v1.PublisherClient()
-    topic_path = publisher.topic_path(project_id, record["name"])
-    publisher.delete_topic(request={"topic": topic_path})
-    return topic_path
+    publisher.delete_topic(request={"topic": record["name"]})
+    return record["name"]
 
-@app.route('/topics/<topic>/subscriptions', methods=['POST'])
+@app.route('/api/topics/<topic>/subscriptions', methods=['POST'])
 def create_topic_subscription(topic):
     record = json.loads(request.data)
     publisher = pubsub_v1.PublisherClient()
@@ -46,7 +48,7 @@ def create_topic_subscription(topic):
         )
     return subscription.name
 
-@app.route('/topics/<topic>/subscriptions', methods=['GET'])
+@app.route('/api/topics/<topic>/subscriptions', methods=['GET'])
 def list_topic_subscriptions(topic):
     publisher = pubsub_v1.PublisherClient()
     topic_path = publisher.topic_path(project_id, topic)
@@ -55,7 +57,7 @@ def list_topic_subscriptions(topic):
         response.append(subscription)
     return jsonify(response)
 
-@app.route('/topics/<topic>/message', methods=['POST'])
+@app.route('/api/topics/<topic>/message', methods=['POST'])
 def send_message(topic):
     record = json.loads(request.data)
     publisher = pubsub_v1.PublisherClient()
@@ -67,16 +69,15 @@ def send_message(topic):
 
     return future.result()
 
-@app.route('/subscriptions', methods=['DELETE'])
+@app.route('/api/subscriptions', methods=['DELETE'])
 def delete_subscription():
     record = json.loads(request.data)
     subscriber = pubsub_v1.SubscriberClient()
-    subscription_path = subscriber.subscription_path(project_id, record["name"])
     with subscriber:
-        subscriber.delete_subscription(request={"subscription": subscription_path})
-    return subscription_path
+        subscriber.delete_subscription(request={"subscription": record["name"]})
+    return record["name"]
 
-@app.route('/subscriptions', methods=['GET'])
+@app.route('/api/subscriptions', methods=['GET'])
 def list_subscriptions():
     subscriber = pubsub_v1.SubscriberClient()
     project_path = f"projects/{project_id}"
