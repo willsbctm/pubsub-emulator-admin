@@ -32,7 +32,7 @@ export default {
       })
       await this.getSubscriptions()
     },
-    async voltar(){
+    async back(){
       this.$router.push({name: 'topics'})
     }
   },
@@ -70,7 +70,7 @@ export default {
         <button class="btn btn-sm btn-primary" @click="createSubscription">Create</button>
       </div>
     </div>
-    <button class="btn btn-sm btn-primary" @click="voltar">Voltar</button>
+    <button class="btn btn-sm btn-primary" @click="back">Back</button>
   </main>
 </template>
 
