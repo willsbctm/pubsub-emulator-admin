@@ -8,3 +8,5 @@ ENV PUBSUB_EMULATOR_HOST=localhost:8432
 ENV PUBSUB_PROJECT_ID=test-project
 
 ENTRYPOINT ["./init.sh"]
+
+EXPOSE 8432
