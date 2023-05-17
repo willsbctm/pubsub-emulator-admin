@@ -12,8 +12,7 @@ export default {
   methods: {
     async sendMessage(){
       const message = (this.$refs.message as HTMLInputElement).value
-      const data = JSON.stringify(message)
-      await axios.post(`http://localhost:8000/api/topics/${this.topic}/message`, data, { 
+      await axios.post(`http://localhost:8000/api/topics/${this.topic}/message`, message, { 
         headers: {
           'Content-Type': 'application/json'
         }
