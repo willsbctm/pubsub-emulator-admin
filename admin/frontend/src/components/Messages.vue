@@ -36,7 +36,7 @@ export default {
     </div>
   </div>
 
-    <div class="row mb-5">
+    <div class="row mb-12">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
@@ -47,10 +47,17 @@ export default {
                 <textarea  ref="message" placeholder="{ 
   &quot;value&quot: 123
 }" class="form-control" rows="30" cols="40"></textarea>
+              <div class="mt-2">
                 <button type="button" class="btn btn-outline-primary me-1" @click="sendMessage">Send</button>
-                <button type="button" class="btn btn-outline-secondary me-1" @click="back">Back</button>
+              </div>
             </div>
         </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-md-1 text-end mt-2">
+        <button type="button" class="btn btn-outline-secondary" @click="back">Back</button>
       </div>
     </div>
   </main>

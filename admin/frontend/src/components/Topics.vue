@@ -38,6 +38,9 @@ export default {
     },
     getName(topic: string) {
       return topic.split('/').slice(-1)[0]
+    },
+    async refresh(){
+      await this.getTopics()
     }
   },
   async mounted() {
@@ -72,9 +75,12 @@ export default {
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
+    <div class="row justify-content-between">
+      <div class="col-md-2">
           <h2>List:</h2>
+      </div>
+      <div class="col-md-2 text-end">
+        <button type="button" class="btn btn-outline-info" @click="refresh()">Refresh</button>
       </div>
     </div>
     <div class="row">

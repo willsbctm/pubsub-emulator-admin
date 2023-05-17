@@ -34,6 +34,9 @@ export default {
     },
     async back(){
       this.$router.push({name: 'topics'})
+    },
+    async refresh(){
+      await this.getSubscriptions()
     }
   },
   async mounted() {
@@ -52,7 +55,7 @@ export default {
     </div>
   </div>
 
-    <div class="row mb-5">
+    <div class="row mb-12">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
@@ -64,15 +67,18 @@ export default {
                 <input type="text" class="form-control me-1" ref="name" placeholder="sub-topic-payments" />
               </div>
                 <button type="button" class="btn btn-outline-primary me-1"  @click="createSubscription">Create</button>
-                <button type="button" class="btn btn-outline-secondary me-1" @click="back">Back</button>
             </div>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
+    <div class="row justify-content-between mt-4">
+      <div class="col-md-2">
           <h2>List:</h2>
+      </div>
+      <div class="col-md-2 text-end">
+        <button type="button" class="btn btn-outline-info me-1" @click="refresh()">Refresh</button>
+        <button type="button" class="btn btn-outline-secondary me-1 ms-md" @click="back">Back</button>
       </div>
     </div>
     <div class="row">
