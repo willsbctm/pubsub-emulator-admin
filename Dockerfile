@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apt update
 RUN apt install -y python3-pip
-ENV PUBSUB_EMULATOR_HOST=localhost:8432
+ENV PUBSUB_EMULATOR_HOST=0.0.0.0:8432
 ENV PUBSUB_PROJECT_ID=test-project
 
 COPY admin/api/requirements.txt admin/api/requirements.txt
