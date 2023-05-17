@@ -3,9 +3,12 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-  </header>
+  <nav class="navbar navbar-light bg-light mb-3">
+  <a class="navbar-brand" href="/">
+    <img src="@/assets/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+      Pubsub Emulator Admin
+  </a>
+</nav>
 
   <RouterView />
 </template>
