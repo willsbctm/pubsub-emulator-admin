@@ -30,8 +30,15 @@ def create_topic():
 @app.route('/api/topics', methods=['DELETE'])
 def delete_topic():
     record = json.loads(request.data)
+    topic_path = record["name"]
     publisher = pubsub_v1.PublisherClient()
-    publisher.delete_topic(request={"topic": record["name"]})
+    subscriber = pubsub_v1.SubscriberClient()
+
+    with subscriber:
+        for subscription in publisher.list_topic_subscriptions(request={"topic": topic_path}):
+            subscriber.delete_subscription(request={"subscription": subscription})
+
+    publisher.delete_topic(request={"topic": topic_path})
     return record["name"]
 
 @app.route('/api/topics/<topic>/subscriptions', methods=['POST'])
